@@ -116,7 +116,7 @@ public class TreapMap<K, V> extends AbstractMap<K, V> implements SortedMap<K, V>
 	final static class Entry<K, V> implements Map.Entry<K, V> {
 
 		K key;
-		/*final*/ int priority;
+		/*final*/ double priority;
 		V value;
 		Entry<K, V> left;
 		Entry<K, V> right;
@@ -125,6 +125,10 @@ public class TreapMap<K, V> extends AbstractMap<K, V> implements SortedMap<K, V>
 		@Override
 		public K getKey() {
 			return key;
+		}
+
+		public double getPriority() {
+			return priority;
 		}
 
 		@Override
