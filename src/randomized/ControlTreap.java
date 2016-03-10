@@ -5,107 +5,99 @@ public class ControlTreap {
 	public static void main(String[] args) {
 
 	}
-
-	/**
-	 * 
-	 * @return a new empty Treap
-	 */
-	public static Treap makeSet() {
-		return new Treap(null);
-	}
 	
 	/**
 	 * insert Node n at the right place into t. Adjust Treap afterwards
 	 * @param n node to be added, having a unique key and priority
 	 * @param t the Treap to insert in
 	 */
-	public static void insert(Node n, Treap t) {
-		boolean done = false;
-		Node current = t.getRoot();
-		Node nodeToInsert = n;
-		if(current == null) {
-			t.setRoot(nodeToInsert);
-			done = true;
-		}
-		while(!done && current != null) {
-			// replace current with nodeToInsert and insert current into one of the subtrees
-			if(nodeToInsert.getPriority() > current.getPriority()) {
-				//place nodeToInsert here
-				nodeToInsert.setParent(current.getParent());
-				//check whether nodeToInsert is the left or the right child of your parent
-				if(nodeToInsert.getParent().getKey() > nodeToInsert.getKey()) {
-					//nodeToInsert is the left child
-					nodeToInsert.getParent().setLeft(nodeToInsert);
-				} else {
-					//nodeToInsert is the right child
-					nodeToInsert.getParent().setRight(nodeToInsert);
-				}
-				nodeToInsert.setLeft(current.getLeft());
-				nodeToInsert.setRight(current.getRight());
-				current.setParent(null);
-				current.setLeft(null);
-				current.setRight(null);
-				
-				//insert current Node into left or right subtree
-				if(nodeToInsert.getKey() > current.getKey()) {
-					//insert into left subtree 
-					if(nodeToInsert.getLeft() == null) {
-						// the left subtree is empty
-						nodeToInsert.setLeft(current);
-						current.setParent(nodeToInsert);
-						done = true;
-					} else {
-						// the left subtree is not empty
-						Node temp = current;
-						current = nodeToInsert.getLeft();
-						nodeToInsert = temp;
-					}
-				} else {
-					//insert into right subtree
-					if(nodeToInsert.getRight() == null) {
-						// the right subtree is empty
-						nodeToInsert.setRight(current);
-						current.setParent(nodeToInsert);
-						done = true;
-					} else {
-						// the left subtree is not empty
-						Node temp = current;
-						current = nodeToInsert.getRight();
-						nodeToInsert = temp;
-					}
-				}
-			// insert nodeToInsert into one of the subtrees 
-			} else {
-				// insert nodeToInsert into left subtree
-				if(n.getKey() < current.getKey()) {
-					// insert nodeToinsert
-					if(current.getLeft() == null) {
-						current.setLeft(nodeToInsert);
-						nodeToInsert.setParent(current);
-						done = true;
-					
-					// insert nodeToInsert into the left subtree
-					} else {
-						current = current.getLeft();
-					}
-					
-				// insert nodeToInsert into right subtree
-				} else { 
-					//insert nodeToinsert
-					if(current.getRight() == null) {
-						current.setRight(nodeToInsert);
-						nodeToInsert.setParent(current);
-						done = true;
-						
-					// insertNodeToInsert into the right subtree
-					} else {
-						current = current.getRight();
-					}
-					
-				}
-			}
-		}
-	}
+//	public static void insert(Node n, Treap t) {
+//		boolean done = false;
+//		Node current = t.getRoot();
+//		Node nodeToInsert = n;
+//		if(current == null) {
+//			t.setRoot(nodeToInsert);
+//			done = true;
+//		}
+//		while(!done && current != null) {
+//			// replace current with nodeToInsert and insert current into one of the subtrees
+//			if(nodeToInsert.getPriority() > current.getPriority()) {
+//				//place nodeToInsert here
+//				nodeToInsert.setParent(current.getParent());
+//				//check whether nodeToInsert is the left or the right child of your parent
+//				if(nodeToInsert.getParent().getKey() > nodeToInsert.getKey()) {
+//					//nodeToInsert is the left child
+//					nodeToInsert.getParent().setLeft(nodeToInsert);
+//				} else {
+//					//nodeToInsert is the right child
+//					nodeToInsert.getParent().setRight(nodeToInsert);
+//				}
+//				nodeToInsert.setLeft(current.getLeft());
+//				nodeToInsert.setRight(current.getRight());
+//				current.setParent(null);
+//				current.setLeft(null);
+//				current.setRight(null);
+//				
+//				//insert current Node into left or right subtree
+//				if(nodeToInsert.getKey() > current.getKey()) {
+//					//insert into left subtree 
+//					if(nodeToInsert.getLeft() == null) {
+//						// the left subtree is empty
+//						nodeToInsert.setLeft(current);
+//						current.setParent(nodeToInsert);
+//						done = true;
+//					} else {
+//						// the left subtree is not empty
+//						Node temp = current;
+//						current = nodeToInsert.getLeft();
+//						nodeToInsert = temp;
+//					}
+//				} else {
+//					//insert into right subtree
+//					if(nodeToInsert.getRight() == null) {
+//						// the right subtree is empty
+//						nodeToInsert.setRight(current);
+//						current.setParent(nodeToInsert);
+//						done = true;
+//					} else {
+//						// the left subtree is not empty
+//						Node temp = current;
+//						current = nodeToInsert.getRight();
+//						nodeToInsert = temp;
+//					}
+//				}
+//			// insert nodeToInsert into one of the subtrees 
+//			} else {
+//				// insert nodeToInsert into left subtree
+//				if(n.getKey() < current.getKey()) {
+//					// insert nodeToinsert
+//					if(current.getLeft() == null) {
+//						current.setLeft(nodeToInsert);
+//						nodeToInsert.setParent(current);
+//						done = true;
+//					
+//					// insert nodeToInsert into the left subtree
+//					} else {
+//						current = current.getLeft();
+//					}
+//					
+//				// insert nodeToInsert into right subtree
+//				} else { 
+//					//insert nodeToinsert
+//					if(current.getRight() == null) {
+//						current.setRight(nodeToInsert);
+//						nodeToInsert.setParent(current);
+//						done = true;
+//						
+//					// insertNodeToInsert into the right subtree
+//					} else {
+//						current = current.getRight();
+//					}
+//					
+//				}
+//			}
+//		}
+//	}
 	
 	/**
 	 * Delete the node with key k and adjust the tree afterwards. If no such Node exist, no Node will be removed
