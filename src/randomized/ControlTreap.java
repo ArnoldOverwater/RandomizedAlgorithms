@@ -23,6 +23,10 @@ public class ControlTreap {
 		boolean done = false;
 		Node current = t.getRoot();
 		Node nodeToInsert = n;
+		if(current == null) {
+			t.setRoot(nodeToInsert);
+			done = true;
+		}
 		while(!done && current != null) {
 			// replace current with nodeToInsert and insert current into one of the subtrees
 			if(nodeToInsert.getPriority() > current.getPriority()) {
@@ -119,8 +123,29 @@ public class ControlTreap {
 	 * @return
 	 */
 	public static Node find(int k, Treap t) {
-		//TODO
-		return null;
+		boolean found = false;
+		Node current = t.getRoot();
+		if(current == null) {
+			return null;
+		}
+		while(found == false) {
+			if(current.getKey() == k) {
+				found = true;
+			} else if(current.getKey() > k) {
+				if(current.getLeft() == null) {
+					return null;
+				} else {
+					current = current.getLeft();
+				}
+			} else {
+				if(current.getRight() == null) {
+					return null;
+				} else {
+					current = current.getRight();
+				}
+			}
+		}
+		return current;
 	}
 
 	/**
@@ -131,7 +156,6 @@ public class ControlTreap {
 	 * @return
 	 */
 	public static Treap join(Treap l, Node n, Treap r) {
-		//TODO
 		Treap t = new Treap(n);
 		n.setLeft(l.getRoot());
 		l.getRoot().setParent(n);
@@ -154,10 +178,11 @@ public class ControlTreap {
 	/**
 	 * split Treap t into two Treaps, one with keys smaller than k and one with keys larger than k
 	 * @param k the key value to split on
-	 * @param t the originial Treap
+	 * @param t the original Treap
 	 * @return an array containing the two resulting Treaps
 	 */
 	public static Treap[] split(int k, Treap t) {
+		
 		//TODO
 		return null;
 	}
