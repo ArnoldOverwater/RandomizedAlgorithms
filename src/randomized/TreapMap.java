@@ -63,8 +63,24 @@ public class TreapMap<K, V> extends AbstractMap<K, V> implements SortedMap<K, V>
 	/** Find */
 	@Override
 	public V get(Object key) {
-		// TODO Auto-generated method stub
-		return super.get(key);
+		boolean found = false;
+		Entry<K, V> current = root;
+		while(!found && current != null) {
+			if(current.key.equals(key)) { // Moet waarschijnlijk ook met de comparator
+				found = true;
+			} else if(true) { // gebruik de comparator hier
+				// Search in left subtree
+				current = current.left;
+			} else {
+				// Search in right subtree
+				current = current.right;
+			}
+		}
+		if(found) {
+			return current.getValue();
+		}
+		// returns null if the key is not found
+		return null;
 	}
 
 	@Override
