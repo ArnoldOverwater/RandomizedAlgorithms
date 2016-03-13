@@ -21,8 +21,9 @@ public class Treap {
 				parent.left = inserted;
 			else if (parent.right == position)
 				parent.right = inserted;
-			while (parent.priority < inserted.priority) {
-				// TODO: rotateLeftOrRight(parent, inserted);
+			while (root != inserted && parent.priority < inserted.priority) {
+				// TODO: rotateLeftOrRight(parent);
+				parent = inserted.parent;
 			}
 			return true;
 		} else
@@ -35,7 +36,14 @@ public class Treap {
 			return false;
 		else {
 			InternalNode deleted = (InternalNode)position;
-			//TODO
+			while (! deleted.left.isLeaf() || ! deleted.right.isLeaf()) {
+				// TODO: rotateLeftOrRight(deleted);
+			}
+			InternalNode parent = deleted.parent;
+			if (parent.left == deleted)
+				parent.left = new Leaf(parent);
+			else if (parent.right == deleted)
+				parent.right = new Leaf(parent);
 			return true;
 		}
 	}
