@@ -17,6 +17,7 @@ public class InternalNode extends Node {
 		key = k;
 		left = new Leaf(this);
 		right = new Leaf(this);
+		right.rightChild = true;
 		parent = par;
 	}
 	

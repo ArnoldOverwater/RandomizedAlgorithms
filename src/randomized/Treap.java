@@ -17,12 +17,20 @@ public class Treap {
 		if (position.isLeaf()) {
 			InternalNode parent = position.parent;
 			InternalNode inserted = new InternalNode(random.nextLong(), key, parent);
-			if (parent.left == position)
-				parent.left = inserted;
-			else if (parent.right == position)
+			if (root == position) {
+				root = inserted;
+				return true;
+			}
+			inserted.rightChild = position.rightChild;
+			if (inserted.rightChild)
 				parent.right = inserted;
+			else
+				parent.left = inserted;
 			while (root != inserted && parent.priority < inserted.priority) {
-				// TODO: rotateLeftOrRight(parent);
+				if (inserted.rightChild)
+					rotateRight(parent);
+				else
+					rotateLeft(parent);
 				parent = inserted.parent;
 			}
 			return true;
@@ -37,13 +45,21 @@ public class Treap {
 		else {
 			InternalNode deleted = (InternalNode)position;
 			while (! deleted.left.isLeaf() || ! deleted.right.isLeaf()) {
-				// TODO: rotateLeftOrRight(deleted);
+				if (deleted.left.isLeaf())
+					rotateRight(deleted);
+				else if (deleted.right.isLeaf())
+					rotateLeft(deleted);
+				else if (random.nextBoolean())
+					rotateLeft(deleted);
+				else
+					rotateRight(deleted);
 			}
 			InternalNode parent = deleted.parent;
-			if (parent.left == deleted)
-				parent.left = new Leaf(parent);
-			else if (parent.right == deleted)
+			if (deleted.rightChild) {
 				parent.right = new Leaf(parent);
+				parent.right.rightChild = true;
+			} else
+				parent.left = new Leaf(parent);
 			return true;
 		}
 	}
@@ -78,18 +94,21 @@ public class Treap {
 		// assert(node.left.parent == node);
 		InternalNode child = (InternalNode)node.left;
 		child.parent = node.parent;
+		child.rightChild = node.rightChild;
 		if (root == node)
 			root = child;
 		else {
 			InternalNode parent = node.parent;
-			if (parent.left == node)
-				parent.left = child;
-			else if (parent.right == node)
+			if (node.rightChild)
 				parent.right = child;
+			else
+				parent.left = child;
 		}
 		node.parent = child;
+		node.rightChild = true;
 		node.left = child.right;
 		child.right.parent = node;
+		child.right.rightChild = false;
 		child.right = node;
 		// assert(child.right.parent == child);
 	}
@@ -98,18 +117,21 @@ public class Treap {
 		// assert(node.right.parent == node);
 		InternalNode child = (InternalNode)node.right;
 		child.parent = node.parent;
+		child.rightChild = node.rightChild;
 		if (root == node)
 			root = child;
 		else {
 			InternalNode parent = node.parent;
-			if (parent.left == node)
-				parent.left = child;
-			else if (parent.right == node)
+			if (node.rightChild)
 				parent.right = child;
+			else
+				parent.left = child;
 		}
 		node.parent = child;
+		node.rightChild = false;
 		node.right = child.left;
 		child.left.parent = node;
+		child.left.rightChild = true;
 		child.left = node;
 		// assert(child.left.parent == child);
 	}
