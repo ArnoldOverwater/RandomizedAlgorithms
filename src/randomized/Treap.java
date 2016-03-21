@@ -12,6 +12,11 @@ public class Treap {
 		random = new Random();
 	}
 
+	/**
+	 * insert a new Node to the tree with random priority
+	 * @param key
+	 * @return
+	 */
 	public boolean insert(long key) {
 		Node position = find(key);
 		if (position.isLeaf()) {
@@ -94,6 +99,10 @@ public class Treap {
 		this.random = random;
 	}
 
+	/**
+	 * Let node become the right child of its left child
+	 * @param node
+	 */
 	private void rotateLeft(InternalNode node) {
 		// assert(node.left.parent == node);
 		InternalNode child = (InternalNode)node.left;
@@ -117,6 +126,10 @@ public class Treap {
 		// assert(child.right.parent == child);
 	}
 
+	/**
+	 * Let node become the left child of its right child
+	 * @param node
+	 */
 	private void rotateRight(InternalNode node) {
 		// assert(node.right.parent == node);
 		InternalNode child = (InternalNode)node.right;
