@@ -104,9 +104,9 @@ public class ControlTreap {
 	 * @param k key value of the node to delete
 	 * @param t the Treap
 	 */
-	public static void delete(int k, Treap t) {
-		//TODO
-	}
+//	public static void delete(int k, Treap t) {
+//		//TODO
+//	}
 	
 	/**
 	 * find and return the Node with key k. If there exists no Node with key k, return null
@@ -114,31 +114,31 @@ public class ControlTreap {
 	 * @param t Treap to be searched
 	 * @return
 	 */
-	public static Node find(int k, Treap t) {
-		boolean found = false;
-		Node current = t.getRoot();
-		if(current == null) {
-			return null;
-		}
-		while(found == false) {
-			if(current.getKey() == k) {
-				found = true;
-			} else if(current.getKey() > k) {
-				if(current.getLeft() == null) {
-					return null;
-				} else {
-					current = current.getLeft();
-				}
-			} else {
-				if(current.getRight() == null) {
-					return null;
-				} else {
-					current = current.getRight();
-				}
-			}
-		}
-		return current;
-	}
+//	public static Node find(int k, Treap t) {
+//		boolean found = false;
+//		Node current = t.getRoot();
+//		if(current == null) {
+//			return null;
+//		}
+//		while(found == false) {
+//			if(current.getKey() == k) {
+//				found = true;
+//			} else if(current.getKey() > k) {
+//				if(current.getLeft() == null) {
+//					return null;
+//				} else {
+//					current = current.getLeft();
+//				}
+//			} else {
+//				if(current.getRight() == null) {
+//					return null;
+//				} else {
+//					current = current.getRight();
+//				}
+//			}
+//		}
+//		return current;
+//	}
 
 	/**
 	 * create and return a new Treap with Node n as root and l and r as children
@@ -147,14 +147,14 @@ public class ControlTreap {
 	 * @param r Treap where all keys are larger than k
 	 * @return
 	 */
-	public static Treap join(Treap l, Node n, Treap r) {
-		Treap t = new Treap(n);
-		n.setLeft(l.getRoot());
-		l.getRoot().setParent(n);
-		n.setRight(r.getRoot());
-		r.getRoot().setParent(n);
-		return t;
-	}
+//	public static Treap join(Treap l, Node n, Treap r) {
+//		Treap t = new Treap(n);
+//		n.setLeft(l.getRoot());
+//		l.getRoot().setParent(n);
+//		n.setRight(r.getRoot());
+//		r.getRoot().setParent(n);
+//		return t;
+//	}
 	
 	/**
 	 * create and return a new Treap containing all the nodes of l and r
@@ -162,10 +162,10 @@ public class ControlTreap {
 	 * @param r right Treap (with large keys)
 	 * @return the resulting Treap
 	 */
-	public static Treap paste(Treap l, Treap r) {
-		//TODO
-		return null;
-	}
+//	public static Treap paste(Treap l, Treap r) {
+//		//TODO
+//		return null;
+//	}
 
 	/**
 	 * split Treap t into two Treaps, one with keys smaller than k and one with keys larger than k
