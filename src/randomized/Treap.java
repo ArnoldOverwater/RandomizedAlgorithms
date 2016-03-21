@@ -54,10 +54,14 @@ public class Treap {
 					rotateRight(deleted);
 				else if (deleted.right.isLeaf())
 					rotateLeft(deleted);
-				else if (random.nextBoolean())
-					rotateLeft(deleted);
-				else
+				else if (((InternalNode)deleted.left).priority < ((InternalNode)deleted.right).priority)
 					rotateRight(deleted);
+				else
+					rotateLeft(deleted);
+			}
+			if (root == deleted) {
+				root = new Leaf(null);
+				return true;
 			}
 			InternalNode parent = deleted.parent;
 			if (deleted.rightChild) {
