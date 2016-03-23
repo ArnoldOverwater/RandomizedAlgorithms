@@ -87,6 +87,23 @@ public class Treap {
 		return position;
 	}
 
+	/**
+	 * Create a new treap with this Treap, t and a new node with key
+	 * @param key
+	 * @param t
+	 * @before max key of this Treap < key < min key of t
+	 * @return true iff the join was succesful
+     */
+	public void join(long key, Treap t) {
+		InternalNode newRoot = new InternalNode(random.nextLong(), key);
+		root.parent = newRoot;
+		newRoot.left = root;
+		newRoot.right = t.root;
+		t.root.parent = newRoot;
+		root = newRoot;
+        rotateNodeDown(root);
+	}
+
 	public Node getRoot() {
 		return root;
 	}
@@ -97,6 +114,38 @@ public class Treap {
 
 	public void setRandom(Random random) {
 		this.random = random;
+	}
+
+	public void rotateNodeDown(InternalNode node) {
+		InternalNode current = node;
+		boolean done = false;
+		while(!done && (!current.left.isLeaf() || !current.right.isLeaf())) {
+			if(current.right.isLeaf()) {			// only a left child
+				InternalNode l = (InternalNode) current.left;
+				if(l.priority > current.priority) {
+					rotateLeft(current);
+				} else {
+					done = true;
+				}
+			} else if(current.left.isLeaf()) {		// only a right child
+				InternalNode r = (InternalNode) current.right;
+				if(r.priority > current.priority) {
+					rotateRight(current);
+				} else {
+					done = true;
+				}
+			} else {								// left and right child
+				InternalNode l = (InternalNode) current.left;
+				InternalNode r = (InternalNode) current.right;
+				if(l.priority > r.priority && l.priority > current.priority) {
+					rotateLeft(current);
+				} else if(r.priority > l.priority && r.priority > current.priority) {
+					rotateRight(current);
+				} else {
+					done = true;
+				}
+			}
+		}
 	}
 
 	/**
