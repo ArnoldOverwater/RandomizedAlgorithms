@@ -73,6 +73,11 @@ public class Treap {
 		}
 	}
 
+    /**
+     * find the Node with key
+     * @param key
+     * @return the Node with Key 'key'. If no such key exist, return the leaf where the should be located
+     */
 	public Node find(long key) {
 		Node position = root;
 		while (! position.isLeaf()) {
@@ -103,6 +108,21 @@ public class Treap {
 		root = newRoot;
         rotateNodeDown(root);
 	}
+
+    /**
+     * paste t unto this Treap.
+     * @before: all keys of t are larger than the largest key of t
+     * @before this and t contain at least one internalNode
+     * @param t
+     */
+    public void paste(Treap t) {
+        Node ChildOfNodeWithLargestKey = find(Long.MAX_VALUE);
+        InternalNode largestKeyNode = ChildOfNodeWithLargestKey.parent;
+        delete(largestKeyNode.key);
+        join(largestKeyNode.key, t);
+    }
+
+    
 
 	public Node getRoot() {
 		return root;
