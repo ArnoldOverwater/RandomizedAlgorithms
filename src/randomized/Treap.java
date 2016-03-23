@@ -18,30 +18,34 @@ public class Treap {
 	 * @return
 	 */
 	public boolean insert(long key) {
-		Node position = find(key);
-		if (position.isLeaf()) {
-			InternalNode parent = position.parent;
-			InternalNode inserted = new InternalNode(random.nextLong(), key, parent);
-			if (root == position) {
-				root = inserted;
-				return true;
-			}
-			inserted.rightChild = position.rightChild;
-			if (inserted.rightChild)
-				parent.right = inserted;
-			else
-				parent.left = inserted;
-			while (root != inserted && parent.priority < inserted.priority) {
-				if (inserted.rightChild)
-					rotateRight(parent);
-				else
-					rotateLeft(parent);
-				parent = inserted.parent;
-			}
-			return true;
-		} else
-			return false;
+        return insertNode(key, random.nextLong());
 	}
+
+    public boolean insertNode(long key, long random) {
+        Node position = find(key);
+        if (position.isLeaf()) {
+            InternalNode parent = position.parent;
+            InternalNode inserted = new InternalNode(random, key, parent);
+            if (root == position) {
+                root = inserted;
+                return true;
+            }
+            inserted.rightChild = position.rightChild;
+            if (inserted.rightChild)
+                parent.right = inserted;
+            else
+                parent.left = inserted;
+            while (root != inserted && parent.priority < inserted.priority) {
+                if (inserted.rightChild)
+                    rotateRight(parent);
+                else
+                    rotateLeft(parent);
+                parent = inserted.parent;
+            }
+            return true;
+        } else
+            return false;
+    }
 
 	public boolean delete(long key) {
 		Node position = find(key);
@@ -122,7 +126,28 @@ public class Treap {
         join(largestKeyNode.key, t);
     }
 
-    
+    /**
+     * returns an array with two Treaps
+     * The first Treap contains all Nodes of the original Treap with value smaller than k
+     * The second Treap contains all Nodes of the original Treap with value larger than k
+     * @param k
+     * @return
+     */
+    public Treap[] split(long k) {
+        delete(k);
+        insertNode(k,Long.MAX_VALUE);
+        Treap[] treapList = new Treap[2];
+        Treap left = new Treap();
+        Treap right = new Treap();
+        InternalNode currentRoot = (InternalNode)root;
+        left.root = currentRoot.left;
+        right.root = currentRoot.right;
+        left.root.parent = null;
+        right.root.parent = null;
+        treapList[0] = left;
+        treapList[1] = right;
+        return treapList;
+    }
 
 	public Node getRoot() {
 		return root;
