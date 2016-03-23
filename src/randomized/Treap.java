@@ -110,7 +110,7 @@ public class Treap {
 		newRoot.right = t.root;
 		t.root.parent = newRoot;
 		root = newRoot;
-        rotateNodeDown(root);
+        rotateNodeDown( (InternalNode)root);
 	}
 
     /**
