@@ -7,18 +7,21 @@ public class Test {
 	public static void main(String[] args) {
 		long end;
 		long current;
-		int[] nvals = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000};
+        int diffTrees = 20;
+        int itOnTree = 500;
+        int totalIts = diffTrees * itOnTree;
+		int[] nvals = {1,10,100,100,1000,10000,100000, 100000000, 100000000};
 		Random rand = new Random();
 		long[][] data = new long[nvals.length][3];
 		int nvalIndex = 0;
 		for (int n : nvals) {
-			long[][] trails = new long[16][3];
+			long[][] trails = new long[totalIts][3];
 			int trailIndex = 0;
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < diffTrees; i++) {
 				Treap treap = new Treap();
 				for (int k = 0; k < n; k++)
 					treap.insert(2 * k);
-				for (int j = 0; j < 4; j++) {
+				for (int j = 0; j < itOnTree; j++) {
 					int random = rand.nextInt(n);
 					current = System.nanoTime();
 					treap.find(2 * random);
@@ -42,14 +45,14 @@ public class Test {
 					trailIndex++;
 				}
 			}
-			for (int i = 0; i < 16; i++) {
+			for (int i = 0; i < totalIts; i++) {
 				data[nvalIndex][0] += trails[i][0];
 				data[nvalIndex][1] += trails[i][1];
 				data[nvalIndex][2] += trails[i][2];
 			}
-			data[nvalIndex][0] /= 16;
-			data[nvalIndex][1] /= 16;
-			data[nvalIndex][2] /= 16;
+			data[nvalIndex][0] /= totalIts;
+			data[nvalIndex][1] /= totalIts;
+			data[nvalIndex][2] /= totalIts;
 			nvalIndex++;
 		}
 
