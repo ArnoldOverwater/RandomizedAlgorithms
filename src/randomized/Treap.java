@@ -102,7 +102,6 @@ public class Treap {
 	 * @param key
 	 * @param t
 	 * @before max key of this Treap < key < min key of t
-	 * @return true iff the join was succesful
      */
 	public void join(long key, Treap t) {
 		InternalNode newRoot = new InternalNode(random.nextLong(), key);
