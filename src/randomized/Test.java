@@ -9,10 +9,10 @@ public class Test {
 		long current;
 
 		int diffTrees = 20;
-        int itOnTree = 500;
+        int itOnTree = 50;
         int totalIts = diffTrees * itOnTree;
 
-        int[] nvals = {1,10,100,100,1000,10000,100000,1000000/*,10000000*/};
+        int[] nvals = {100,100,1000,1,10,100,100,1000,10000,100000,1000000,1000000, 10000000};
 
         Random rand = new Random();
 
