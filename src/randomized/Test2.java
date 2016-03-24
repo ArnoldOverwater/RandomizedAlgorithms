@@ -51,6 +51,7 @@ public class Test2 {
         }
 
 
+        System.out.println("Left, Right, Join, Split, Paste");
         //calculate avg results:
         for(int m = 0;m<sizeLeft.length;m++) {
             for(int n =0;n<sizeRight.length;n++) {
@@ -62,9 +63,9 @@ public class Test2 {
                     currSumSplit+= times[m][n][r][1];
                     currSumPaste+= times[m][n][r][2];
                 }
-                System.out.println("l: " + sizeLeft[m] + " r: " + sizeRight[n] + " Join: " + currSumJoin/repetitions +
-                        " Split: " + currSumSplit/repetitions +
-                        " Paste: " + currSumPaste/repetitions);
+                System.out.println(sizeLeft[m] + "," + sizeRight[n] + "," + currSumJoin/repetitions +
+                        "," + currSumSplit/repetitions +
+                        "," + currSumPaste/repetitions);
             }
         }
     }
