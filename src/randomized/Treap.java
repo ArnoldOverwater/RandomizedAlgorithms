@@ -6,6 +6,7 @@ public class Treap {
 
 	private Node root;
 	private Random random;
+	private int rotateCount;
 
 	public Treap() {
 		root = new Leaf(null);
@@ -218,6 +219,7 @@ public class Treap {
 		child.right.rightChild = false;
 		child.right = node;
 		// assert(child.right.parent == child);
+		rotateCount++;
 	}
 
 	/**
@@ -245,5 +247,13 @@ public class Treap {
 		child.left.rightChild = true;
 		child.left = node;
 		// assert(child.left.parent == child);
+		rotateCount++;
 	}
+
+	public int getRotateCountAndReset() {
+		int c = rotateCount;
+		rotateCount = 0;
+		return c;
+	}
+
 }
