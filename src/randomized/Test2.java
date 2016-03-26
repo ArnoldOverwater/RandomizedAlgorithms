@@ -4,12 +4,8 @@ import java.util.Random;
 
 public class Test2 {
     public static void main(String[] args) {
-        int[] sizeLeft = {1,10,100,1000,10000};
-        int[] sizeRight = {1,1,1,1,1,
-                            10,10,10,10,10,
-                            100,100,100,100,100,
-                            1000,1000,1000,1000,1000,
-                            10000,10000,10000,10000,10000};
+        int[] sizeLeft = {1,1,10,100,1000,10000,100000};
+        int[] sizeRight = {1,10,100,1000,10000,100000,100000};
         int repetitions = 1000;
 
         long begin;
